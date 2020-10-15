@@ -9,3 +9,11 @@ inputs:
     description: 'If apt should be executed with sudo or without'
     required: false
     default: 'true'
+  key:
+    description: 'Private SSH key'
+    required: false
+    default: 'false'
+  cert:
+    description: 'Public SSH key'
+    required: false
+    default: 'false'

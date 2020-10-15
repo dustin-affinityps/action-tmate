@@ -26,6 +26,7 @@ export async function run() {
 
     core.debug("Generating SSH keys")
     fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
+
     try {
       await execShellCommand(`echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa`);
     } catch { }
@@ -40,8 +41,8 @@ export async function run() {
     const tmateSSH = await execShellCommand(`tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'`);
     const tmateWeb = await execShellCommand(`tmate -S /tmp/tmate.sock display -p '#{tmate_web}'`);
 
-    core.setOutput('ssh', tmateSSH);
-    core.setOutput('web', tmateWeb);
+    core.setOutput('ssh', tmateSSH.replace(/^ssh /, ''));
+    core.setOutput('web', tmateWeb.replace(/^web /, ''));
 
     console.debug("Entering main loop")
     while (true) {
