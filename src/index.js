@@ -49,19 +49,19 @@ export async function run() {
 
     console.debug("Entering main loop");
 
-    while (true) {
-      core.info(`WebURL: ${tmateWeb}`);
-      core.info(`SSH: ${tmateSSH}`);
+    // while (true) {
+    //   core.info(`WebURL: ${tmateWeb}`);
+    //   core.info(`SSH: ${tmateSSH}`);
 
-      const skip = fs.existsSync("/continue") || fs.existsSync(path.join(process.env.GITHUB_WORKSPACE, "continue"));
+    //   const skip = fs.existsSync("/continue") || fs.existsSync(path.join(process.env.GITHUB_WORKSPACE, "continue"));
 
-      if (skip) {
-        core.info("Existing debugging session because '/continue' file was created");
-        break
-      }
+    //   if (skip) {
+    //     core.info("Existing debugging session because '/continue' file was created");
+    //     break
+    //   }
 
-      await sleep(5000);
-    }
+    //   await sleep(5000);
+    // }
   } catch (error) {
     core.setFailed(error.message);
   }
