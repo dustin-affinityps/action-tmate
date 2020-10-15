@@ -41,8 +41,8 @@ export async function run() {
     const tmateSSH = await execShellCommand(`tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'`);
     const tmateWeb = await execShellCommand(`tmate -S /tmp/tmate.sock display -p '#{tmate_web}'`);
 
-    const outSSH = encodeURI(tmateSSH.replace(/ssh /, ''));
-    const outHTTP = tmateWeb.replace(/web /, '');
+    const outSSH = encodeURI(tmateSSH.replace(/^ssh /, '')).replace(/\%0A$/, '');
+    const outHTTP = encodeURI(tmateWeb.replace(/^ssh /, '')).replace(/\%0A$/, '');
 
     core.setOutput('ssh', outSSH);
     core.setOutput('web', outHTTP);
